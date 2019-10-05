@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id "org.sonarqube" version "2.7.1"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    def projectName = "d2-testing-mocking"
+
+    properties {
+        property "sonar.projectName", "${projectName}"
+        property "sonar.projectKey", "${projectName}"
+        property "sonar.sources", "src/main/java"
+        property "sonar.language", "java"
+        property "sonar.java.binaries", "build"
+        property "sonar.junit.reportPaths", "build/test-results/test"
+        property "sonar.jacoco.reportPaths", "build/jacoco/test.exec"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    compileOnly "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7.1"
+}
