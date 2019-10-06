@@ -22,7 +22,6 @@ apply plugin: 'org.sonarqube'
 
 sonarqube {
     def projectName = "d2-testing-mocking"
-
     properties {
         property "sonar.projectName", "${projectName}"
         property "sonar.projectKey", "${projectName}"
