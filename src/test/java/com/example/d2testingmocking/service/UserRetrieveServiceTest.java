@@ -49,7 +49,7 @@ public class UserRetrieveServiceTest {
         // when
         UserNotFoundException exception = assertThrows(UserNotFoundException.class, () -> userRetrieveService.findByEmail(email));
         // then
-        assertEquals("User with email " + email + " was not found", exception.getMessage());
+        assertNotEquals("User with email " + email + " was not found", exception.getMessage());
     }
 
     @Test
